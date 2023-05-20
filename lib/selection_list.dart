@@ -11,7 +11,8 @@ class SelectionList extends StatefulWidget {
       this.theme,
       this.countryBuilder,
       this.useUiOverlay = true,
-      this.useSafeArea = false})
+      this.useSafeArea = false,
+      this.showSearch = true})
       : super(key: key);
 
   final PreferredSizeWidget? appBar;
@@ -21,6 +22,7 @@ class SelectionList extends StatefulWidget {
   final Widget Function(BuildContext context, CountryCode)? countryBuilder;
   final bool useUiOverlay;
   final bool useSafeArea;
+  final bool showSearch;
 
   @override
   _SelectionListState createState() => _SelectionListState();
@@ -80,6 +82,7 @@ class _SelectionListState extends State<SelectionList> {
           diff = height - contrainsts.biggest.height;
           _heightscroller = (contrainsts.biggest.height) / _alphabet.length;
           _sizeheightcontainer = (contrainsts.biggest.height);
+
           return Stack(
             children: <Widget>[
               CustomScrollView(
@@ -89,63 +92,38 @@ class _SelectionListState extends State<SelectionList> {
                   SliverToBoxAdapter(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Text(
-                            widget.theme?.searchText ?? 'SEARCH',
-                            style: TextStyle(
-                                color:
-                                    widget.theme?.labelColor ?? Colors.black),
-                          ),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          child: TextField(
-                            controller: _controller,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                              contentPadding: EdgeInsets.only(
-                                  left: 15, bottom: 0, top: 0, right: 15),
-                              hintText:
-                                  widget.theme?.searchHintText ?? "Search...",
-                            ),
-                            onChanged: _filterElements,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Text(
-                            widget.theme?.lastPickText ?? 'LAST PICK',
-                            style: TextStyle(
-                                color:
-                                    widget.theme?.labelColor ?? Colors.black),
-                          ),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          child: Material(
-                            color: Colors.transparent,
-                            child: ListTile(
-                              leading: Image.asset(
-                                widget.initialSelection!.flagUri!,
-                                package: 'country_list_pick',
-                                width: 32.0,
-                              ),
-                              title: Text(widget.initialSelection!.name!),
-                              trailing: Padding(
-                                padding: const EdgeInsets.only(right: 20.0),
-                                child: Icon(Icons.check, color: Colors.green),
+                      children: buildSearch(widget.showSearch) +
+                          [
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Text(
+                                widget.theme?.lastPickText ?? 'LAST PICK',
+                                style: TextStyle(
+                                    color: widget.theme?.labelColor ??
+                                        Colors.black),
                               ),
                             ),
-                          ),
-                        ),
-                        SizedBox(height: 15),
-                      ],
+                            Container(
+                              color: Colors.white,
+                              child: Material(
+                                color: Colors.transparent,
+                                child: ListTile(
+                                  leading: Image.asset(
+                                    widget.initialSelection!.flagUri!,
+                                    package: 'country_list_pick',
+                                    width: 32.0,
+                                  ),
+                                  title: Text(widget.initialSelection!.name!),
+                                  trailing: Padding(
+                                    padding: const EdgeInsets.only(right: 20.0),
+                                    child:
+                                        Icon(Icons.check, color: Colors.green),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 15),
+                          ],
                     ),
                   ),
                   SliverList(
@@ -183,6 +161,39 @@ class _SelectionListState extends State<SelectionList> {
       ),
     );
     return widget.useSafeArea ? SafeArea(child: scaffold) : scaffold;
+  }
+
+  List<Widget> buildSearch(bool showSearch) {
+    if (showSearch) {
+      return [
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Text(
+            widget.theme?.searchText ?? 'SEARCH',
+            style: TextStyle(color: widget.theme?.labelColor ?? Colors.black),
+          ),
+        ),
+        Container(
+          color: Colors.white,
+          child: TextField(
+            controller: _controller,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
+              contentPadding:
+                  EdgeInsets.only(left: 15, bottom: 0, top: 0, right: 15),
+              hintText: widget.theme?.searchHintText ?? "Search...",
+            ),
+            onChanged: _filterElements,
+          ),
+        ),
+      ];
+    } else {
+      return [];
+    }
   }
 
   Widget getListCountry(CountryCode e) {
