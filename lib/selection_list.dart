@@ -48,9 +48,11 @@ class _SelectionListState extends State<SelectionList> {
   @override
   void initState() {
     countries = widget.elements;
-    countries.sort((a, b) {
-      return a.name.toString().compareTo(b.name.toString());
-    });
+    if (widget.theme?.sortCountries ?? true) {
+      countries.sort((a, b) {
+        return a.name.toString().compareTo(b.name.toString());
+      });
+    }
     _controllerScroll = ScrollController();
     _controllerScroll!.addListener(_scrollListener);
     super.initState();

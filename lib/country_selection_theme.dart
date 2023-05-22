@@ -15,6 +15,7 @@ class CountryTheme {
   final bool? showEnglishName;
   final Color? labelColor;
   final bool? isShowAlphabet;
+  final bool? sortCountries;
 
   CountryTheme({
     this.labelColor,
@@ -31,5 +32,6 @@ class CountryTheme {
     this.initialSelection,
     this.showEnglishName,
     this.isShowAlphabet,
+    this.sortCountries,
   });
 }
