@@ -9,17 +9,19 @@ export 'support/code_country.dart';
 export 'country_selection_theme.dart';
 
 class CountryListPick extends StatefulWidget {
-  CountryListPick(
-      {this.onChanged,
-      this.initialSelection,
-      this.appBar,
-      this.pickerBuilder,
-      this.countryBuilder,
-      this.theme,
-      this.useUiOverlay = true,
-      this.useSafeArea = false,
-      this.showSearch = true,
-      this.displayedCountries});
+  CountryListPick({
+    this.onChanged,
+    this.initialSelection,
+    this.appBar,
+    this.pickerBuilder,
+    this.countryBuilder,
+    this.theme,
+    this.useUiOverlay = true,
+    this.useSafeArea = false,
+    this.showSearch = true,
+    this.displayedCountries,
+    this.overrideList,
+  });
 
   final String? initialSelection;
   final ValueChanged<CountryCode?>? onChanged;
@@ -33,11 +35,12 @@ class CountryListPick extends StatefulWidget {
   final bool useSafeArea;
   final bool showSearch;
   final List<String>? displayedCountries;
+  final List<Map<String, String>>? overrideList;
 
   @override
   _CountryListPickState createState() {
-    List<Map> jsonList =
-        this.theme?.showEnglishName ?? true ? countriesEnglish : codes;
+    List<Map<String, String>> jsonList = this.overrideList ??
+        (this.theme?.showEnglishName ?? true ? countriesEnglish : codes);
 
     if (displayedCountries != null) {
       jsonList = jsonList
@@ -50,7 +53,7 @@ class CountryListPick extends StatefulWidget {
               name: s['name'],
               code: s['code'],
               dialCode: s['dial_code'],
-              flagUri: 'flags/${s['code'].toLowerCase()}.png',
+              flagUri: 'flags/${s['code']!.toLowerCase()}.png',
             ))
         .toList();
     return _CountryListPickState(elements);
