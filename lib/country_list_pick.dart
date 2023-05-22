@@ -130,6 +130,8 @@ class _CountryListPickState extends State<CountryListPick> {
                         selectedItem!.flagUri!,
                         package: 'country_list_pick',
                         width: 32.0,
+                        height: 21.0,
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),

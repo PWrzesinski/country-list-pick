@@ -112,6 +112,8 @@ class _SelectionListState extends State<SelectionList> {
                                   widget.initialSelection!.flagUri!,
                                   package: 'country_list_pick',
                                   width: 32.0,
+                                  height: 21.0,
+                                  fit: BoxFit.fill,
                                 ),
                                 title: Text(widget.initialSelection!.name!),
                                 trailing: Padding(
@@ -208,7 +210,9 @@ class _SelectionListState extends State<SelectionList> {
           leading: Image.asset(
             e.flagUri!,
             package: 'country_list_pick',
-            width: 30.0,
+            width: 32.0,
+            height: 21.0,
+            fit: BoxFit.fill,
           ),
           title: Text(e.name!),
           onTap: () {
