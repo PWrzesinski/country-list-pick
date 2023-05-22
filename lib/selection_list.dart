@@ -95,7 +95,7 @@ class _SelectionListState extends State<SelectionList> {
                     children: buildSearch(widget.showSearch) +
                         [
                           Padding(
-                            padding: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Text(
                               widget.theme?.lastPickText ?? 'LAST PICK',
                               style: TextStyle(
@@ -119,8 +119,17 @@ class _SelectionListState extends State<SelectionList> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 16),
                         ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    widget.theme?.changeText ?? 'CHANGE TO:',
+                    style: TextStyle(
+                      color: widget.theme?.labelColor ?? Colors.black,
+                    ),
                   ),
                 ),
                 SliverList(
@@ -177,7 +186,7 @@ class _SelectionListState extends State<SelectionList> {
     if (showSearch) {
       return [
         Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(16.0),
           child: Text(
             widget.theme?.searchText ?? 'SEARCH',
             style: TextStyle(color: widget.theme?.labelColor ?? Colors.black),
@@ -194,7 +203,7 @@ class _SelectionListState extends State<SelectionList> {
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
               contentPadding:
-                  EdgeInsets.only(left: 15, bottom: 0, top: 0, right: 15),
+                  EdgeInsets.only(left: 16, bottom: 0, top: 0, right: 16),
               hintText: widget.theme?.searchHintText ?? "Search...",
             ),
             onChanged: _filterElements,
@@ -299,7 +308,7 @@ class _SelectionListState extends State<SelectionList> {
                     .toString()
                     .compareTo(countries[i].name.toString().toUpperCase()[0]) ==
                 0) {
-              _controllerScroll!.jumpTo((i * _itemsizeheight) + 15);
+              _controllerScroll!.jumpTo((i * _itemsizeheight) + 16);
               break;
             }
           }
