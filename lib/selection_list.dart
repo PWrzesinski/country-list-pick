@@ -136,7 +136,7 @@ class _SelectionListState extends State<SelectionList> {
                   )
                 ],
               ),
-              if (isShow == true)
+              if (isShow == true && (widget.theme?.isShowAlphabet ?? true))
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
