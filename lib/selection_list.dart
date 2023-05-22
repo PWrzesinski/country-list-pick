@@ -125,10 +125,20 @@ class _SelectionListState extends State<SelectionList> {
                 ),
                 SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
-                    return widget.countryBuilder != null
+                    var countryItem = widget.countryBuilder != null
                         ? widget.countryBuilder!(
                             context, countries.elementAt(index))
                         : getListCountry(countries.elementAt(index));
+                    if (index == countries.length - 1) {
+                      return countryItem;
+                    } else {
+                      return Column(
+                        children: [
+                          countryItem,
+                          Divider(height: 0, color: Colors.grey),
+                        ],
+                      );
+                    }
                   }, childCount: countries.length),
                 )
               ],
