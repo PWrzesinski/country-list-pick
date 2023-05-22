@@ -104,16 +104,27 @@ class _SelectionListState extends State<SelectionList> {
                             ),
                           ),
                           Container(
-                            color: Colors.grey[50],
+                            color: Colors.grey[20],
                             child: Material(
                               color: Colors.transparent,
                               child: ListTile(
-                                leading: Image.asset(
-                                  widget.initialSelection!.flagUri!,
-                                  package: 'country_list_pick',
-                                  width: 32.0,
-                                  height: 21.0,
-                                  fit: BoxFit.fill,
+                                leading: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.blue,
+                                      width: 1,
+                                    ),
+                                    // borderRadius: const BorderRadius.all(
+                                    //   Radius.circular(5),
+                                    // ),
+                                  ),
+                                  child: Image.asset(
+                                    widget.initialSelection!.flagUri!,
+                                    package: 'country_list_pick',
+                                    width: 32.0,
+                                    height: 21.0,
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                                 title: Text(widget.initialSelection!.name!),
                                 trailing: Padding(
@@ -203,16 +214,27 @@ class _SelectionListState extends State<SelectionList> {
   Widget getListCountry(CountryCode e) {
     return Container(
       height: 50,
-      color: Colors.grey[50],
+      color: Colors.grey[20],
       child: Material(
         color: Colors.transparent,
         child: ListTile(
-          leading: Image.asset(
-            e.flagUri!,
-            package: 'country_list_pick',
-            width: 32.0,
-            height: 21.0,
-            fit: BoxFit.fill,
+          leading: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.blue,
+                width: 1,
+              ),
+              // borderRadius: const BorderRadius.all(
+              //   Radius.circular(5),
+              // ),
+            ),
+            child: Image.asset(
+              e.flagUri!,
+              package: 'country_list_pick',
+              width: 32.0,
+              height: 21.0,
+              fit: BoxFit.fill,
+            ),
           ),
           title: Text(e.name!),
           onTap: () {
