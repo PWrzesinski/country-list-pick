@@ -119,7 +119,6 @@ class _SelectionListState extends State<SelectionList> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 16),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
@@ -129,7 +128,6 @@ class _SelectionListState extends State<SelectionList> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 16),
                         ],
                   ),
                 ),
