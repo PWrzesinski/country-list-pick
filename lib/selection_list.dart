@@ -104,7 +104,7 @@ class _SelectionListState extends State<SelectionList> {
                             ),
                           ),
                           Container(
-                            color: Colors.grey[20],
+                            color: Colors.white,
                             child: Material(
                               color: Colors.transparent,
                               child: ListTile(
@@ -199,7 +199,7 @@ class _SelectionListState extends State<SelectionList> {
   Widget getListCountry(CountryCode e) {
     return Container(
       height: 50,
-      color: Colors.grey[20],
+      color: Colors.white,
       child: Material(
         color: Colors.transparent,
         child: ListTile(
