@@ -332,7 +332,7 @@ class _FlagImage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey[700]!,
+          color: Colors.grey[400]!,
           width: 1,
         ),
         // borderRadius: const BorderRadius.all(
