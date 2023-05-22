@@ -76,93 +76,93 @@ class _SelectionListState extends State<SelectionList> {
         statusBarBrightness: !kIsWeb ? Brightness.dark : Brightness.light,
       ));
     height = MediaQuery.of(context).size.height;
-    Widget scaffold = Scaffold(
-      appBar: widget.appBar,
-      body: Container(
-        color: Color(0xfff4f4f4),
-        child: LayoutBuilder(builder: (context, contrainsts) {
-          diff = height - contrainsts.biggest.height;
-          _heightscroller = (contrainsts.biggest.height) / _alphabet.length;
-          _sizeheightcontainer = (contrainsts.biggest.height);
+    var body = Container(
+      color: Color(0xfff4f4f4),
+      child: LayoutBuilder(builder: (context, contrainsts) {
+        diff = height - contrainsts.biggest.height;
+        _heightscroller = (contrainsts.biggest.height) / _alphabet.length;
+        _sizeheightcontainer = (contrainsts.biggest.height);
 
-          return Stack(
-            children: <Widget>[
-              CustomScrollView(
-                controller: _controllerScroll,
-                physics: const AlwaysScrollableScrollPhysics(),
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: buildSearch(widget.showSearch) +
-                          [
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Text(
-                                widget.theme?.lastPickText ?? 'LAST PICK',
-                                style: TextStyle(
-                                    color: widget.theme?.labelColor ??
-                                        Colors.black),
-                              ),
+        return Stack(
+          children: <Widget>[
+            CustomScrollView(
+              controller: _controllerScroll,
+              physics: const AlwaysScrollableScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: buildSearch(widget.showSearch) +
+                        [
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(
+                              widget.theme?.lastPickText ?? 'LAST PICK',
+                              style: TextStyle(
+                                  color:
+                                      widget.theme?.labelColor ?? Colors.black),
                             ),
-                            Container(
-                              color: Colors.white,
-                              child: Material(
-                                color: Colors.transparent,
-                                child: ListTile(
-                                  leading: Image.asset(
-                                    widget.initialSelection!.flagUri!,
-                                    package: 'country_list_pick',
-                                    width: 32.0,
-                                  ),
-                                  title: Text(widget.initialSelection!.name!),
-                                  trailing: Padding(
-                                    padding: const EdgeInsets.only(right: 20.0),
-                                    child:
-                                        Icon(Icons.check, color: Colors.green),
-                                  ),
+                          ),
+                          Container(
+                            color: Colors.white,
+                            child: Material(
+                              color: Colors.transparent,
+                              child: ListTile(
+                                leading: Image.asset(
+                                  widget.initialSelection!.flagUri!,
+                                  package: 'country_list_pick',
+                                  width: 32.0,
+                                ),
+                                title: Text(widget.initialSelection!.name!),
+                                trailing: Padding(
+                                  padding: const EdgeInsets.only(right: 20.0),
+                                  child: Icon(Icons.check, color: Colors.green),
                                 ),
                               ),
                             ),
-                            SizedBox(height: 15),
-                          ],
-                    ),
-                  ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate((context, index) {
-                      return widget.countryBuilder != null
-                          ? widget.countryBuilder!(
-                              context, countries.elementAt(index))
-                          : getListCountry(countries.elementAt(index));
-                    }, childCount: countries.length),
-                  )
-                ],
-              ),
-              if (isShow == true && (widget.theme?.isShowAlphabet ?? true))
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onVerticalDragUpdate: _onVerticalDragUpdate,
-                    onVerticalDragStart: _onVerticalDragStart,
-                    child: Container(
-                      height: 20.0 * 30,
-                      color: Colors.transparent,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: []..addAll(
-                            List.generate(_alphabet.length,
-                                (index) => _getAlphabetItem(index)),
                           ),
-                      ),
+                          SizedBox(height: 15),
+                        ],
+                  ),
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return widget.countryBuilder != null
+                        ? widget.countryBuilder!(
+                            context, countries.elementAt(index))
+                        : getListCountry(countries.elementAt(index));
+                  }, childCount: countries.length),
+                )
+              ],
+            ),
+            if (isShow == true && (widget.theme?.isShowAlphabet ?? true))
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onVerticalDragUpdate: _onVerticalDragUpdate,
+                  onVerticalDragStart: _onVerticalDragStart,
+                  child: Container(
+                    height: 20.0 * 30,
+                    color: Colors.transparent,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: []..addAll(
+                          List.generate(_alphabet.length,
+                              (index) => _getAlphabetItem(index)),
+                        ),
                     ),
                   ),
                 ),
-            ],
-          );
-        }),
-      ),
+              ),
+          ],
+        );
+      }),
     );
-    return widget.useSafeArea ? SafeArea(child: scaffold) : scaffold;
+
+    return Scaffold(
+      appBar: widget.appBar,
+      body: widget.useSafeArea ? SafeArea(child: body) : body,
+    );
   }
 
   List<Widget> buildSearch(bool showSearch) {
