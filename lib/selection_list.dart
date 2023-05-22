@@ -108,23 +108,8 @@ class _SelectionListState extends State<SelectionList> {
                             child: Material(
                               color: Colors.transparent,
                               child: ListTile(
-                                leading: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.blue,
-                                      width: 1,
-                                    ),
-                                    // borderRadius: const BorderRadius.all(
-                                    //   Radius.circular(5),
-                                    // ),
-                                  ),
-                                  child: Image.asset(
-                                    widget.initialSelection!.flagUri!,
-                                    package: 'country_list_pick',
-                                    width: 32.0,
-                                    height: 21.0,
-                                    fit: BoxFit.fill,
-                                  ),
+                                leading: _FlagImage(
+                                  flagUri: widget.initialSelection!.flagUri!,
                                 ),
                                 title: Text(widget.initialSelection!.name!),
                                 trailing: Padding(
@@ -218,24 +203,7 @@ class _SelectionListState extends State<SelectionList> {
       child: Material(
         color: Colors.transparent,
         child: ListTile(
-          leading: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.blue,
-                width: 1,
-              ),
-              // borderRadius: const BorderRadius.all(
-              //   Radius.circular(5),
-              // ),
-            ),
-            child: Image.asset(
-              e.flagUri!,
-              package: 'country_list_pick',
-              width: 32.0,
-              height: 21.0,
-              fit: BoxFit.fill,
-            ),
-          ),
+          leading: _FlagImage(flagUri: e.flagUri!),
           title: Text(e.name!),
           onTap: () {
             _sendDataBack(context, e);
@@ -351,5 +319,33 @@ class _SelectionListState extends State<SelectionList> {
     if (_controllerScroll!.offset <=
             _controllerScroll!.position.minScrollExtent &&
         !_controllerScroll!.position.outOfRange) {}
+  }
+}
+
+class _FlagImage extends StatelessWidget {
+  final String flagUri;
+
+  const _FlagImage({Key? key, required this.flagUri}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.grey[700]!,
+          width: 1,
+        ),
+        // borderRadius: const BorderRadius.all(
+        //   Radius.circular(5),
+        // ),
+      ),
+      child: Image.asset(
+        flagUri,
+        package: 'country_list_pick',
+        width: 32.0,
+        height: 21.0,
+        fit: BoxFit.fill,
+      ),
+    );
   }
 }
