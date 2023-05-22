@@ -120,16 +120,17 @@ class _SelectionListState extends State<SelectionList> {
                             ),
                           ),
                           SizedBox(height: 16),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              widget.theme?.changeText ?? 'CHANGE TO:',
+                              style: TextStyle(
+                                color: widget.theme?.labelColor ?? Colors.black,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 16),
                         ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    widget.theme?.changeText ?? 'CHANGE TO:',
-                    style: TextStyle(
-                      color: widget.theme?.labelColor ?? Colors.black,
-                    ),
                   ),
                 ),
                 SliverList(
